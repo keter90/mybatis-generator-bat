@@ -21,7 +21,7 @@
         <!--        配置生成pojo的toString()方法插件-->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
         <!-- 注释配置 -->
-        <commentGenerator type="MyCommentGenerator">
+        <commentGenerator>
             <!-- 阻止生成注释true-是; false-否 -->
             <property name="suppressAllComments" value="true" />
             <!-- 阻止生成的注释包含时间戳 -->
