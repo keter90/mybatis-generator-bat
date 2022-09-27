@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 指定数据连接驱动jar地址 -->
+    <classPathEntry location="mysql-connector-java-5.1.47.jar"/>
+    <!--执行generator插件生成文件的命令： call mvn mybatis-generator:generate -e -->
+    <!-- 引入配置文件 -->
+<!--    <properties resource="application.yml"/>-->
+
+    <context id="MySQLTables" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!-- 生成的java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8" />
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter"
+                  value="org.mybatis.generator.api.dom.DefaultJavaFormatter" />
+        <!-- 格式化xml代码 -->
+        <property name="xmlFormatter"
+                  value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
+        <!--        配置生成pojo的toString()方法插件-->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <!-- 注释配置 -->
+        <commentGenerator type="MyCommentGenerator">
+            <!-- 阻止生成注释true-是; false-否 -->
+            <property name="suppressAllComments" value="true" />
+            <!-- 阻止生成的注释包含时间戳 -->
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+        <!-- 链接数据库的配置 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="数据源"
+                        userId="账户名"
+                        password="密码"/>
+
+        <!-- 关于生成实体类的设置 -->
+        <!-- targetPackage 生成代码的目标目录 -->
+        <!-- targetProject 目录所属位置 -->
+        <javaModelGenerator targetPackage="com.jd.icity.lunling.linkage.adapter.gzt.api.entity" targetProject="../src/main/java">
+            <!-- 在targetPackge的基础上根据schema再生成一层package 默认flase -->
+            <property name="enableSubPackages" value="true"/>
+            <!-- 是否在get方法中 对String类型的字段做空的判断 -->
+            <property name="trimStrings" value="true"/>
+            <!-- 是否生成一个包含所有字段的构造器 -->
+            <property name="constructorBased" value="false"/>
+            <!-- 是否创建一个不可变类-->
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+
+        <!--关于生成映射文件的设置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="../src/main/resources">
+            <!--同上-->
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--关于生成mapper层的设置-->
+        <javaClientGenerator type="mapper" targetPackage="com.jd.icity.lunling.linkage.adapter.gzt.api.mapper" targetProject="../src/main/java">
+            <!--同上-->
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--需要生成的代码对应的表名
+            tableName 对应表名
+            domainObjectName 实体类名称
+             如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate
+              <property name="useActualColumnNames" value="false"/>
+        -->
+        <table tableName="tracer_message" domainObjectName="TracerMessage"></table>
+    </context>
+</generatorConfiguration>
